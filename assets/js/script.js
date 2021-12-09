@@ -1,17 +1,30 @@
 // Study API data - Temp, Wind, Humidity, UV
+// .main.temp convert to imperial
+// .wind.speed
+// .main.humidity
 
-// setup fetch api data 
-// add event handler for city search 
+// https://openweathermap.org/current#name
+// https://openweathermap.org/api/one-call-api
 
-var getWeatherData = function(){
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=london&appid=8bafed382c7c1d380aab6b5abd6f355a";
+// pass citysearch to ID, then use One Call API for all the data 
+
+var formEl = document.querySelector("#user-form");
+var cityInputEl = document.querySelector("#city-search");   
+
+
+// setup fetch api city data 
+
+var getWeatherData = function(city){
+
+    // format the api URL
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=8bafed382c7c1d380aab6b5abd6f355a";
     fetch(apiUrl)
     .then(function(response){
         if (response.ok) {
             response.json().then(function(data){
                 console.log(data);
             });
-        } else {
+        } else {    
             alert("City not found")
         }
     });
@@ -19,16 +32,24 @@ var getWeatherData = function(){
 };
 
 
-var submitBtnEl = document.querySelector(".btn")
-
 
 // display name function, date and  weather in today's weather container 
 // append most recent search to search history list container 
 
-// var citySearchHanlder = function(event){
-//     event.preventDefault();
+// add event handler for city search 
+var citySearchHandler = function(event){
 
-// }
+    event.preventDefault();
+
+    var cityName = cityInputEl.value.trim();
+
+    if (cityName){    
+        getWeatherData(cityName);
+        cityInputEl.value =""
+    } else {
+        alert("Please enter a valid city")
+    }
+}
 
 
-// submitBtnEl.addEventListener("submit", citySearchHandler)
+formEl.addEventListener("submit", citySearchHandler)
