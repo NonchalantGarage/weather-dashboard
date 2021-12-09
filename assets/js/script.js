@@ -3,6 +3,8 @@
 // .wind.speed
 // .main.humidity
 
+// get geocode by lon lat
+// https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
 // https://openweathermap.org/current#name
 // https://openweathermap.org/api/one-call-api
 
