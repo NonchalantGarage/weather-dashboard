@@ -17,6 +17,28 @@ var currentCityEl = document.querySelector("#current-results");
 
 
 // setup fetch api city data 
+var getForecastData = function(city){
+
+    apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=8bafed382c7c1d380aab6b5abd6f355a&unites=imperial"
+    fetch(apiUrl)
+        .then(function(response){
+        response.json()
+            .then(function(data){
+            displayForecast(data)
+        });
+    });
+}
+
+
+
+
+ var displayForecast = function(forecastData, date) {
+    for (i=0; i < 5; i++){
+        
+    }
+ }   
+
+
 
 var getWeatherData = function(city){
 
@@ -37,7 +59,6 @@ var getWeatherData = function(city){
 
 var displayCurrentCity = function(weatherData, citySearch){
     currentCityEl.textContent = "";
-
 
     var cityEl = document.createElement("h4");
     cityEl.textContent = citySearch + " "+ today + " ";
@@ -63,13 +84,10 @@ var displayCurrentCity = function(weatherData, citySearch){
     listAttributeEl.appendChild(humidityEl)
 
     var uvEl = document.createElement("li")
-
-    
 }
 
 
 // display name function, date and  weather in today's weather container 
-// append most recent search to search history list container 
 
 // add event handler for city search 
 var citySearchHandler = function(event){
