@@ -42,6 +42,10 @@ var getForecastData = function(city){
 // DISPLAY FORECAST CARDS
  var displayForecast = function(forecastData) {
 
+    var iconImg = "http://openweathermap.org/img/w/" + forecastData.list[i].weather.icon + ".png";
+
+    console.log(iconImg);
+
     var forecastContainerEl = document.querySelector("#forecast-cards");
     forecastContainerEl.textContent = ""
 
@@ -51,10 +55,14 @@ var getForecastData = function(city){
             var forecastListEl = document.createElement("ul");
             forecastCardEl.appendChild(forecastListEl);
             
+            var imgEl = document.createElement("img");
+            imgEl.setAttribute = ("src",iconImg);
+            forecastListEl.appendChild(imgEl)
+
             var dateEl = document.createElement("h6");
             dateEl.textContent = todayForecast(i + 1);
             forecastListEl.appendChild(dateEl)
-
+            
             
             var tempEl = document.createElement("li");
             tempEl.textContent = "Temp: " + forecastData.list[i].main.temp + " F";
@@ -95,10 +103,18 @@ var getWeatherData = function(city){
 var displayCurrentCity = function(weatherData, citySearch){
     currentCityEl.textContent = "";
 
+    
+
     var cityEl = document.createElement("h4");
     cityEl.textContent = citySearch + " "+ today + "";
-
     currentCityEl.appendChild(cityEl);
+
+    var imgLink = "https://openweathermap.org/img/wn/" + weatherData.weather.icon + ".png";
+    
+    var imgEl = document.createElement("img");
+    imgEl.setAttribute = ("src",imgLink);
+    currentCityEl.appendChild(imgEl)
+
 
     // create UL to append li for each weather attribute 
 
