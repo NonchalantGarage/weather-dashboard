@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
@@ -12,38 +12,42 @@
 <body class="flex-column min-100-vh">
 
     <!-- Header -->
-    <header class="hero">
+    <header class="center-align ">
     <h1 class="title"><i class=""></i> Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
     
     <!-- Input for city search -->
-    <div class ="card">
+    <main class ="row">
+    <div class ="col s4 ">
         <h3 class="card-header text-uppercase">Search by City</h3>
         <form id="user-form" class="card-body">
             <label for="city" class="form-label"></label>
             <input type="text" autofocus="true" name="Search City" id="city-search" class="form-input" placeholder="USA only"/>
             <button type="submit" class="btn">Search</button>
         </form>
-    </div>  
-    <!-- Search history list -->
-    <div>
+        <!-- Search history list -->
+        <div>
         
-    </div>
+        </div>
+    </div>  
+
     <!-- results container -->
-    <div>
+    <div class="col s8">
+        <!-- Current city search results -->
+        <div id="current-results"> 
 
+        </div>
+
+         <!-- 5 Day Forecast container -->
+        <h3>5-Day Forecast</h3>
+        <div class = "forecast-cards">
+        </div>
     </div>
+</main>
 
-    <!-- 5 Day Forecast container -->
-    <h3>5-Day Forecast</h3>
-    <div class = "forecast-cards">
-    </div>
-
-
-    
-    
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/js/script.js"> </script>
 </body>
 </html>
