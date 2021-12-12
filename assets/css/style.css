@@ -1,0 +1,47 @@
+header{
+    border-bottom: solid black;
+}
+
+.current-results{
+    margin: 10px;
+}
+
+li {
+    padding: 10px;
+    list-style-type: none;
+}
+span {
+    padding: 5px;
+}
+h6 {
+    padding: 10px;
+}
+h4 {
+    padding: 10px;
+}
+img {
+    padding: 10px;
+}
+
+button {
+    font-family: 'Bebas Neue', monospace;
+
+}
+
+.current-results{
+    background-color: white;
+}
+.forecast-cards ul {
+    display: inline-block;
+}
+
+html {
+    background-color:cornsilk;
+    font-family: 'Bebas Neue', monospace;
+}
+
+.forecast-cards ul {
+    display: inline-block;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');

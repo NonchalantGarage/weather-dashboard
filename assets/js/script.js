@@ -49,6 +49,7 @@ var getForecastData = function(city){
 
         for (i=0; i < 5; i++){
             var forecastCardEl = document.createElement("div")
+            forecastCardEl.setAttribute("class","card")
             forecastContainerEl.appendChild(forecastCardEl);
             var forecastListEl = document.createElement("ul");
             forecastCardEl.appendChild(forecastListEl);
@@ -154,7 +155,7 @@ var displayCurrentCity = function(weatherData, citySearch){
     // displaySearchHistory(citySearch)
 }
 var displayUV = function(uvData){
-    var uvEl = document.createElement("span")
+    var uvEl = document.createElement("li")
     uvEl.textContent = "UV: " + uvData.current.uvi;
     currentCityEl.appendChild(uvEl);
     if (uvData.current.uvi < 2 ){
@@ -172,7 +173,7 @@ var displaySearchHistory = function(searchName){
     var historyListEl = document.createElement("ul");
     searchHistoryContainerEl.appendChild(historyListEl);
     var historySearchEl = document.createElement("button");
-    historySearchEl.setAttribute("class", "history-btn")
+    historySearchEl.setAttribute("class", "history-btn btn blue-grey lighten-4 ")
     historySearchEl.textContent = searchName;
     historyListEl.appendChild(historySearchEl);
 }
@@ -206,7 +207,6 @@ var historyHandler =function(event){
     getForecastData(historyName);
 
     }
-
 }
 
 var loadHistory = function(){
