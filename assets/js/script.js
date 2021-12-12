@@ -42,9 +42,7 @@ var getForecastData = function(city){
 // DISPLAY FORECAST CARDS
  var displayForecast = function(forecastData) {
 
-    var iconImg = "http://openweathermap.org/img/w/" + forecastData.list[i].weather.icon + ".png";
 
-    console.log(iconImg);
 
     var forecastContainerEl = document.querySelector("#forecast-cards");
     forecastContainerEl.textContent = ""
@@ -54,9 +52,10 @@ var getForecastData = function(city){
             forecastContainerEl.appendChild(forecastCardEl);
             var forecastListEl = document.createElement("ul");
             forecastCardEl.appendChild(forecastListEl);
-            
+
+            var iconImg = "http://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
             var imgEl = document.createElement("img");
-            imgEl.setAttribute = ("src",iconImg);
+            imgEl.setAttribute("src", iconImg);
             forecastListEl.appendChild(imgEl)
 
             var dateEl = document.createElement("h6");
@@ -91,6 +90,23 @@ var getWeatherData = function(city){
                 saveHistory.push(city);
                 localStorage.setItem("cityName", JSON.stringify(saveHistory));
                 displayCurrentCity(data, city);
+
+                var lon = data.coord.lon;
+                var lat = data.coord.lat;
+                var name = data.name
+                var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" +lat+ "&lon=" +lon+"&appid=8bafed382c7c1d380aab6b5abd6f355a";
+                fetch(oneCallUrl)
+                .then(function(response){
+                    if (response.ok){
+                        response.json().then(function(data){
+                            displayUV(data,city);            
+                        })
+                    }
+                })    
+
+
+
+                
             });
         } else {    
             alert("City not found")
@@ -109,10 +125,10 @@ var displayCurrentCity = function(weatherData, citySearch){
     cityEl.textContent = citySearch + " "+ today + "";
     currentCityEl.appendChild(cityEl);
 
-    var imgLink = "https://openweathermap.org/img/wn/" + weatherData.weather.icon + ".png";
+    var imgLink = "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
     
     var imgEl = document.createElement("img");
-    imgEl.setAttribute = ("src",imgLink);
+    imgEl.setAttribute("src",imgLink);
     currentCityEl.appendChild(imgEl)
 
 
@@ -134,10 +150,20 @@ var displayCurrentCity = function(weatherData, citySearch){
     humidityEl.textContent = "Humidity: " + weatherData.main.humidity + " %";
     listAttributeEl.appendChild(humidityEl)
 
-    var uvEl = document.createElement("li")
-
-    displaySearchHistory(citySearch)
-
+    
+    // displaySearchHistory(citySearch)
+}
+var displayUV = function(uvData){
+    var uvEl = document.createElement("span")
+    uvEl.textContent = "UV: " + uvData.current.uvi;
+    currentCityEl.appendChild(uvEl);
+    if (uvData.current.uvi < 2 ){
+        uvEl.setAttribute("class", "green lighten-3")
+    } else if (uvData.current.uvi < 2 && uvData.current.uvi <=5){
+        uvEl.setAttribute("class", "yellow lighten-3")
+    } else {
+        uvEl.setAttribute("class", "red lighten-3")
+    }
 }
 
 // DISPLAY SEARCH HISTORY
@@ -163,6 +189,7 @@ var citySearchHandler = function(event){
     if (cityName){    
         getWeatherData(cityName);
         getForecastData(cityName);
+        displaySearchHistory(cityName)
         cityInputEl.value =""
     } else {
         alert("Please enter a valid city")
@@ -192,4 +219,5 @@ var loadHistory = function(){
 
 historyEl.addEventListener("click", historyHandler);
 formEl.addEventListener("submit", citySearchHandler);
+
 loadHistory();
